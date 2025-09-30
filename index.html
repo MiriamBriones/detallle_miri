@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universo para Ti 💜</title>
+  <link rel="stylesheet" href="/css/detalle.css">
+</head>
+<body>
+  <!-- Cuenta regresiva -->
+  <div id="countdown">3</div>
+
+  <!-- Universo -->
+  <div id="universe">
+    <!-- Botón secreto -->
+    <button id="secret-btn">🖤 Haz clic aquí</button>
+    <div id="secret-message">🌹 Eres mi persona favorita en este universo 🌹</div>
+
+    <!-- Fondo y efectos -->
+    <canvas id="starfield"></canvas>
+    <canvas id="comet-text"></canvas>
+    <div id="nebula"></div>
+    <div class="blackhole"></div>
+
+    <!-- Órbitas -->
+    <div class="orbit" id="orbit1"></div>
+    <div class="orbit" id="orbit2"></div>
+    <div class="orbit" id="orbit3"></div>
+    <div class="orbit" id="orbit4"></div>
+    <div class="orbit" id="orbit5"></div>
+
+    <!-- Contenedor para elementos flotantes (frases, carros, corazones, etc.) -->
+    <div id="flotantes"></div>
+    <div id="hearts"></div>
+
+    <!-- Lazo regalo -->
+    <div id="gift-wrap">
+      <div id="ribbon"></div>
+      <div id="gift-message">Espero que te guste 💜</div>
+    </div>
+
+    <!-- Cofre espacial -->
+    <div id="space-chest"></div>
+
+    <!-- Frase final y firma -->
+    <div id="final-message">Este universo lo hice solo para ti, Feliz 30 de sep bonito 💜</div>
+    <div id="signature">– Con cariño, Miriam</div>
+  </div>
+
+  <!-- Controles de música -->
+  <div id="music-controls">
+    <button id="play-music">🎶 Play</button>
+    <button id="pause-music">⏸ Pause</button>
+  </div>
+  <audio id="bg-music" loop>
+    <source src="/assets/m.mp3juice.app - Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video) (320 KBps).mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- JS al final para evitar errores de DOM -->
+  <script src="/js/detalle.js"></script>
+</body>
+</html>

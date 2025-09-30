@@ -1,0 +1,382 @@
+/* ============================
+   Universo 3D Romántico
+   ============================ */
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+  font-family: Arial, sans-serif;
+  perspective: 1200px;
+  color: white;
+}
+
+/* Cuenta regresiva */
+#countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  color: rgb(0, 0, 0);
+  z-index: 100;
+}
+
+/* Contenedor principal */
+#universe {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+/* ============================
+   Fondo nebulosa
+   ============================ */
+#nebula {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: url("https://media1.tenor.com/images/7647f11273f010477c34ae51b68fb0fb/tenor.gif?itemid=15726286") center/cover no-repeat;
+  opacity: 0.5;
+  filter: blur(6px) brightness(1.3);
+  animation: moveNebula 200s linear infinite;
+}
+
+@keyframes moveNebula {
+  from { transform: scale(1) translate(0,0); }
+  to { transform: scale(1.6) translate(-250px,-200px); }
+}
+
+#nebula::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, rgba(1,200,255,0.4), transparent 70%);
+  animation: colorShift 25s infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes colorShift {
+  0% { background: radial-gradient(circle at center, rgba(1,200,255,0.4), transparent 70%); }
+  25% { background: radial-gradient(circle at center, rgba(255,100,200,0.35), transparent 70%); }
+  50% { background: radial-gradient(circle at center, rgba(180,100,255,0.35), transparent 70%); }
+  75% { background: radial-gradient(circle at center, rgba(255,200,100,0.35), transparent 70%); }
+  100% { background: radial-gradient(circle at center, rgba(1,200,255,0.4), transparent 70%); }
+}
+
+/* Lienzo de estrellas */
+#starfield,
+#comet-text {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Agujero negro central */
+.blackhole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 280px;
+  height: 280px;
+  margin: -140px 0 0 -140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,255,1), rgba(0,0,0,0));
+  box-shadow: 0 0 150px 80px cyan, 0 0 220px 130px violet;
+  animation: pulse 5s infinite alternate;
+  z-index: 2;
+}
+@keyframes pulse {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(1.3); opacity: 0.5; }
+}
+
+/* Órbitas inclinadas */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  z-index: 3;
+}
+#orbit1 { animation: spin1 25s linear infinite; }
+#orbit2 { animation: spin2 40s linear infinite reverse; }
+#orbit3 { animation: spin3 55s linear infinite; }
+#orbit4 { animation: spin4 70s linear infinite reverse; }
+#orbit5 { animation: spin5 90s linear infinite; }
+@keyframes spin1 { from { transform: rotateY(0deg) rotateX(30deg); } to { transform: rotateY(360deg) rotateX(30deg); } }
+@keyframes spin2 { from { transform: rotateY(0deg) rotateX(-45deg); } to { transform: rotateY(360deg) rotateX(-45deg); } }
+@keyframes spin3 { from { transform: rotateY(0deg) rotateX(60deg); } to { transform: rotateY(360deg) rotateX(60deg); } }
+@keyframes spin4 { from { transform: rotateY(0deg) rotateX(20deg); } to { transform: rotateY(360deg) rotateX(20deg); } }
+@keyframes spin5 { from { transform: rotateY(0deg) rotateX(-70deg); } to { transform: rotateY(360deg) rotateX(-70deg); } }
+
+/* ============================
+   Elementos flotantes
+   ============================ */
+.flotante {
+  position: absolute;
+  font-size: 16px;
+  color: cyan;
+  text-shadow: 0 0 10px cyan, 0 0 20px violet;
+  white-space: nowrap;
+  z-index: 4;
+  pointer-events: auto;
+  user-select: none;
+}
+.flotante.frase {
+  font-weight: bold;
+  font-size: 18px;
+  color: #00ffe0;
+  text-shadow: 0 0 10px cyan, 0 0 25px violet;
+}
+.flotante.frase.romantica {
+  color: #ff66ff;
+  text-shadow: 0 0 15px magenta, 0 0 30px violet;
+}
+.flotante.auto img,
+.auto img {
+  width: 90px;
+  height: auto;
+  filter: drop-shadow(0 0 15px magenta);
+  transition: transform 0.3s, filter 0.3s;
+}
+.flotante.auto img:hover,
+.auto img:hover {
+  transform: scale(1.2) rotateY(15deg);
+  filter: drop-shadow(0 0 25px magenta) brightness(1.15);
+}
+
+/* Corazones flotando */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  color: pink;
+  opacity: 0;
+  animation: floatHeart 6s infinite;
+  z-index: 4;
+  pointer-events: none;
+}
+@keyframes floatHeart {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-220px) scale(1.4); opacity: 0; }
+}
+
+/* Lazo regalo */
+#gift-wrap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 50;
+  transition: opacity 3s ease-in-out;
+}
+#ribbon {
+  width: 300px; height: 300px;
+  background: repeating-linear-gradient(45deg, #ffffff 0 10px, #cbfffc 10px 20px);
+  border-radius: 20px;
+  animation: pulseRibbon 1s infinite alternate;
+}
+@keyframes pulseRibbon { from { transform: scale(1); } to { transform: scale(1.1); } }
+#gift-message {
+  margin-top: 20px;
+  font-size: 28px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+/* Cofre espacial */
+#space-chest {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 20;
+  transition: opacity 2s;
+}
+
+/* Frase final y firma */
+#final-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  text-align: center;
+  text-shadow: 0 0 20px rgb(34, 240, 255), 0 0 40px violet;
+  opacity: 0;
+  z-index: 5;
+  transition: opacity 3s ease-in-out;
+}
+#signature {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 20px;
+  color: rgb(49, 255, 238);
+  text-shadow: 0 0 10px rgb(38, 255, 219);
+  opacity: 0;
+  z-index: 15;
+}
+
+/* ============================
+   Botón secreto y música
+   ============================ */
+#secret-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999; /* muy alto para estar encima de todo */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#000000,#6b00b6);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+#secret-btn:hover { transform: translateY(-3px) scale(1.05); opacity: 1; }
+
+#secret-message {
+  position: absolute;
+  bottom: 70px;
+  left: 20px;
+  background: rgba(0,0,0,0.85);
+  padding: 12px 18px;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+  color: #ffdce6;
+  font-weight: bold;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(20px); /* empieza un poco abajo */
+}
+
+/* Clase visible con efecto levitar */
+#secret-message.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0px); /* sube suavemente a su posición */
+  animation: floatSecret 2.5s ease-in-out infinite alternate;
+}
+
+/* Animación de levitar */
+@keyframes floatSecret {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Música */
+#music-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 7;
+  display: flex;
+  gap: 6px;
+}
+#music-controls button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(68,68,68,0.9);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+#music-controls button:hover { transform: translateY(-2px); transition: .12s; }
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width:600px){
+  .flotante.frase { font-size: 14px; }
+  .flotante { font-size: 14px; }
+  .flotante.auto img { width: 70px; }
+  #final-message { font-size: 22px; padding: 0 12px; }
+  .heart { font-size: 18px; }
+}
+
+
+/* ============================
+   Carros y Mini Cards
+   ============================ */
+.car {
+  position: absolute;
+  cursor: pointer;
+  z-index: 20; /* Más alto que los flotantes y estrellas */
+  pointer-events: auto; 
+}
+
+.car img {
+  width: 90px;
+  transition: transform 0.3s, filter 0.3s;
+  pointer-events: none; /* importante: click pasa al div padre */
+}
+
+.car img:hover {
+  transform: scale(1.2) rotateY(10deg);
+  filter: drop-shadow(0 0 20px magenta) brightness(1.2);
+  /* no hace falta pointer-events aquí */
+}
+
+
+/* Mini card que aparece al hacer click */
+.mini-card {
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  border-radius: 12px;
+  padding: 8px 10px;
+  color: #ffdce6;
+  font-weight: bold;
+  width: 130px; /* un poco más ancho */
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(255,0,255,0.6);
+  pointer-events: auto; /* permitir clicks dentro de la mini-card */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 30; /* Encima de todo */
+}
+
+.mini-card img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 5px;
+  pointer-events: none;
+}
+
+/* Animación al aparecer */
+.mini-card.show {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+/* Responsive */
+@media (max-width:600px){
+  .car img { width: 40px; }
+  .mini-card { width: 100px; font-size: 12px; }
+}
